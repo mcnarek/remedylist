@@ -58,7 +58,7 @@ fun AdherenceDatePager(data: Map<String, List<AdherenceDataModel>>, modifier: Mo
             mutableStateOf(state.currentPage > 0)
         }
         var enableForward: Boolean by remember {
-            mutableStateOf(state.currentPage < count)
+            mutableStateOf(state.currentPage < count - 1)
         }
         Row(
             modifier = Modifier.fillMaxWidth(),
