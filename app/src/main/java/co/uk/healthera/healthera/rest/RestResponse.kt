@@ -27,11 +27,11 @@ fun <T> Response<T>.fold(): RestResponse<T> {
                 RestResponse.Error(message())
             }
         } else {
-            Log.i("body", body().toString())
+            Log.i("API: body", body().toString())
             RestResponse.Error(error = message())
         }
     } catch (e: IOException) {
-        Log.e("Network Error -> ", e.message ?: "")
+        Log.e("API Network Error -> ", e.message ?: "")
         e.printStackTrace()
         RestResponse.Error(error = e.message, throwable = e)
     }

@@ -31,6 +31,8 @@ import com.google.accompanist.pager.ExperimentalPagerApi
 import com.google.accompanist.pager.HorizontalPager
 import com.google.accompanist.pager.PagerState
 import com.google.accompanist.pager.rememberPagerState
+import com.google.accompanist.swiperefresh.SwipeRefresh
+import com.google.accompanist.swiperefresh.SwipeRefreshState
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
@@ -44,7 +46,11 @@ import kotlinx.coroutines.launch
 
 @OptIn(ExperimentalPagerApi::class)
 @Composable
-fun AdherenceDatePager(data: Map<String, List<AdherenceDataModel>>, modifier: Modifier = Modifier) {
+fun AdherenceDatePager(
+    data: Map<String, List<AdherenceDataModel>>,
+    modifier: Modifier = Modifier,
+    onRefresh: () -> Unit = {},
+) {
     Column(modifier = modifier.fillMaxSize()) {
         val state: PagerState = rememberPagerState()
         val keys: Set<String> = data.keys
@@ -101,7 +107,7 @@ fun AdherenceDatePager(data: Map<String, List<AdherenceDataModel>>, modifier: Mo
                 .fillMaxSize()
                 .weight(1f), state, contentPadding = PaddingValues(8.dp)
         ) {
-            AdherenceList(data = data[keys.elementAt(it)] ?: emptyList())
+            AdherenceList(data = data[keys.elementAt(it)] ?: emptyList(), onRefresh = onRefresh)
         }
 
         LaunchedEffect(state) {
@@ -116,10 +122,19 @@ fun AdherenceDatePager(data: Map<String, List<AdherenceDataModel>>, modifier: Mo
 }
 
 @Composable
-private fun AdherenceList(data: List<AdherenceDataModel>, modifier: Modifier = Modifier) {
-    LazyColumn(modifier = modifier.fillMaxSize()) {
-        items(data) {
-            AdherenceItem(data = it)
+private fun AdherenceList(
+    data: List<AdherenceDataModel>,
+    modifier: Modifier = Modifier,
+    onRefresh: () -> Unit = {},
+) {
+    SwipeRefresh(
+        state = SwipeRefreshState(false), onRefresh = {
+            onRefresh.invoke()
+        }) {
+        LazyColumn(modifier = modifier.fillMaxSize()) {
+            items(data) {
+                AdherenceItem(data = it)
+            }
         }
     }
 }
@@ -132,7 +147,6 @@ private fun AdherenceItem(data: AdherenceDataModel, modifier: Modifier = Modifie
             .padding(4.dp)
             .fillMaxWidth()
             .heightIn(min = min),
-        backgroundColor = Color.LightGray
     ) {
         ConstraintLayout(
             modifier = Modifier
@@ -198,7 +212,7 @@ private fun ButtonNavs(
     icon: ImageVector,
     contentDesc: String? = null,
     enable: Boolean = true,
-    onClick: () -> Unit = {}
+    onClick: () -> Unit = {},
 ) {
     IconButton(onClick = onClick, enabled = enable) {
         Icon(

@@ -12,7 +12,9 @@ import javax.inject.Inject
  * Copyright: Healthera
  * E-Mail: mcnarek@gmail.com
  */
-class AdherenceRepositoryImpl @Inject constructor(private val _restApiService: RestApiService) :
+class AdherenceRepositoryImpl @Inject constructor(
+    private val _restApiService: RestApiService,
+) :
     AdherenceRepository {
     override suspend fun getAdherence(): RestResponse<AdherencesResponse> {
         return _restApiService.getAdherences().fold()

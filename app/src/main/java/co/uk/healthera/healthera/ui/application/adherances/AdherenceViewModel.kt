@@ -18,7 +18,9 @@ import javax.inject.Inject
 @HiltViewModel
 class AdherenceViewModel
 @Inject
-constructor(private val _adherenceUseCase: AdherenceUseCase) : ViewModel() {
+constructor(
+    private val _adherenceUseCase: AdherenceUseCase,
+) : ViewModel() {
     private val _adherenceData: MutableStateFlow<Map<String, List<AdherenceDataModel>>> by lazy {
         MutableStateFlow(mutableMapOf())
     }
