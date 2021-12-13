@@ -13,7 +13,7 @@ fun Long?.parseAsDate(): String {
     if (this == null || this == 0L) return "-"
 
     return try {
-        SimpleDateFormat("dd/MM/yyyy", Locale.ENGLISH).format(Date(this * 1000))
+        SimpleDateFormat("dd MMMM yyyy", Locale.ENGLISH).format(Date(this * 1000))
     } catch (e: Exception) {
         e.printStackTrace()
         "-"
