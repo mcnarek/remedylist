@@ -1,4 +1,4 @@
-Whim demo app
+Healthera demo app
 
 # <img src="https://www.healthera.co.uk/images/Healthera.svg?label=latest"/> #
 
