@@ -40,7 +40,7 @@ class AdherenceUseCaseImpl @Inject constructor(
                     } ?: emptyList()
 
                     val mappedList: Map<String, List<AdherenceDataModel>> =
-                        data.groupBy { it.alarmTime }
+                        data.groupBy { it.alarmDate }
                     emit(mappedList)
                 }
             }

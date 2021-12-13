@@ -4,6 +4,7 @@ import co.uk.healthera.healthera.domain.model.AdherenceDataModel
 import co.uk.healthera.healthera.domain.model.RemedyDataModel
 import co.uk.healthera.healthera.rest.model.AdherenceData
 import co.uk.healthera.healthera.utils.parseAsDate
+import co.uk.healthera.healthera.utils.parseTime
 import javax.inject.Inject
 
 
@@ -19,9 +20,10 @@ class AdherenceMapper @Inject constructor() {
                 id = it.adherenceId ?: "",
                 remedyId = it.remedyId ?: "",
                 doseQuantity = it.doseQuantity,
-                actionTime = it.actionTime.parseAsDate(),
+                actionTime = it.actionTime.parseTime(),
                 action = it.action,
-                alarmTime = it.alarmTime.parseAsDate(),
+                alarmDate = it.alarmTime.parseAsDate(),
+                alarmTime = it.alarmTime.parseTime(),
                 remedy = remedyDataModel
             )
         }

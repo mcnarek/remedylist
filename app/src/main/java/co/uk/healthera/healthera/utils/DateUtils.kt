@@ -19,3 +19,14 @@ fun Long?.parseAsDate(): String {
         "-"
     }
 }
+
+fun Long?.parseTime(): String {
+    if (this == null || this == 0L) return "-"
+
+    return try {
+        SimpleDateFormat("HH:mm", Locale.ENGLISH).format(Date(this * 1000))
+    } catch (e: Exception) {
+        e.printStackTrace()
+        "-"
+    }
+}

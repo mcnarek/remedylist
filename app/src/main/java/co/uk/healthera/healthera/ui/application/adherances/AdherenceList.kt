@@ -6,10 +6,7 @@ import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.shape.CircleShape
-import androidx.compose.material.Card
-import androidx.compose.material.Icon
-import androidx.compose.material.IconButton
-import androidx.compose.material.Text
+import androidx.compose.material.*
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.ArrowBack
 import androidx.compose.material.icons.filled.ArrowForward
@@ -153,7 +150,7 @@ private fun AdherenceItem(data: AdherenceDataModel, modifier: Modifier = Modifie
                 .fillMaxSize()
                 .padding(8.dp)
         ) {
-            val (icon, date, desc, action) = createRefs()
+            val (icon, date, desc, action, actionTime) = createRefs()
 
             Image(
                 modifier = Modifier
@@ -181,8 +178,9 @@ private fun AdherenceItem(data: AdherenceDataModel, modifier: Modifier = Modifie
 
             data.remedy?.let {
                 Text(
-                    text = "${it.name}, ${data.alarmTime}",
-                    fontSize = 18.sp,
+                    text = it.name,
+                    fontSize = 14.sp,
+                    color = MaterialTheme.colors.secondary,
                     modifier = Modifier
                         .fillMaxWidth()
                         .constrainAs(desc) {

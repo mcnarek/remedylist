@@ -13,6 +13,8 @@ data class AdherenceDataModel(
 
     val alarmTime: String = "",
 
+    val alarmDate: String = "",
+
     val actionTime: String = "",
 
     val action: String? = null,
