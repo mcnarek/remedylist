@@ -15,8 +15,8 @@ import javax.inject.Inject
 
 /**
  * Created by Narek Hayrapetyan on 13 Dec 2021.
- * Copyright: Digitain
- * E-Mail: narek.hayrapetyan@digitain.com
+ * Copyright: Healthera
+ * E-Mail: mcnarek@gmail.com
  */
 class ConnectivityInterceptor @Inject constructor(@ApplicationContext private val context: Context) :
     Interceptor {
